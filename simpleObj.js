@@ -1,5 +1,5 @@
-// Similar to brute, but use an object, which is apparently more efficent
-
+// Similar to simpleArr, but using objects, which are apparently more efficient
+let fs = require("fs");
 module.exports = simpleObj;
 
 function simpleObj(input) {

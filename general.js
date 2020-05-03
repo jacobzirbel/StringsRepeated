@@ -1,10 +1,14 @@
 const fs = require("fs");
-const brute = require("./bruteArr");
-const obj = require("./bruteObj");
-let input = fs.readFileSync("medium.txt", "utf8");
+const simpleArr = require("./simpleArr");
+const simpleObj = require("./simpleObj");
+const simpleList = require("./simpleList");
+let input = fs.readFileSync("samples/small.txt", "utf8");
 input = prepareInput(input);
-console.log(compareObjects(brute(input), obj(input)));
 
+console.log(compareObjects(simpleObj(input), simpleList(input)));
+// getAverageTime(simpleArr);
+// getAverageTime(simpleObj);
+// getAverageTime(simpleList);
 function getAverageTime(method) {
 	let n = 1;
 	let times = [];
@@ -23,10 +27,15 @@ function time(method) {
 function compareObjects(a, b) {
 	let aKeys = Object.keys(a);
 	let bKeys = Object.keys(b);
-	if (aKeys.length != bKeys.length) return false;
 
-	for (let key in aKeys) {
-		if (a[key] !== b[key]) return false;
+	if (aKeys.length !== bKeys.length) {
+		return false;
+	}
+
+	for (let key of bKeys) {
+		if (a[key] !== b[key]) {
+			return false;
+		}
 	}
 	return true;
 }
@@ -35,13 +44,14 @@ function prepareInput(input) {
 	input = input.toUpperCase();
 	input = input.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()"\[\]]/g, "");
 	input = input.replace(/[\n]/g, " ");
-	input = input.replace(/\s{2,}/g, " ");
-	return input;
+	input = input.replace(/\d/g, "");
+	input = input.replace(/\s{1,}/g, " ");
+	return input.trim() + " ";
 }
 
 function write(result, file) {
 	string = JSON.stringify(result, null, 1);
-	file = "output" + new Date().getSeconds() + ".txt";
+	file = "output" + file + ".txt";
 	fs.writeFile(file, string, function (err) {
 		if (err) {
 			return console.log(err);
@@ -49,5 +59,3 @@ function write(result, file) {
 		console.log(`${file} was updated!`);
 	});
 }
-
-module.exports = { input: input, write: write };
