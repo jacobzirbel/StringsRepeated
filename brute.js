@@ -1,13 +1,13 @@
-const general = require("./general");
-const inputString = general.input;
-const inputArray = inputString.split(" ");
+// Check all phrases against each other
 
-const output = getAllMatches(inputArray);
-let outputString = JSON.stringify(output, null, 1);
+module.exports = bruteArray;
 
-general.write(outputString, "output.txt");
+function bruteArray(input) {
+	inputArray = input.split(" ");
+	return getMatchesArray(inputArray);
+}
 
-function getAllMatches(inputArray) {
+function getMatchesArray(inputArray) {
 	const matchCounts = {};
 	let keepGoing = true;
 	let n = 0;
