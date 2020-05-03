@@ -1,16 +1,30 @@
 const fs = require("fs");
-const brute = require("./brute");
-const obj = require("./obj");
-let input = fs.readFileSync("small.txt", "utf8");
+const brute = require("./bruteArr");
+const obj = require("./bruteObj");
+let input = fs.readFileSync("medium.txt", "utf8");
 input = prepareInput(input);
+console.log(compareObjects(brute(input), obj(input)));
+
+function getAverageTime(method) {
+	let n = 1;
+	let times = [];
+	for (let i = 0; i < n; i++) {
+		times.push(time(method));
+	}
+	console.log(times.reduce((e, a) => a + e, 0) / n);
+}
+function time(method) {
+	let s = new Date();
+	method(input);
+	let e = new Date();
+	return e - s;
+}
 
 function compareObjects(a, b) {
 	let aKeys = Object.keys(a);
 	let bKeys = Object.keys(b);
-	if (aKeys.length != bKeys.length) {
-		console.log("here");
-		return false;
-	}
+	if (aKeys.length != bKeys.length) return false;
+
 	for (let key in aKeys) {
 		if (a[key] !== b[key]) return false;
 	}
