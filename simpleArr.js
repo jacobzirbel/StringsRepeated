@@ -1,8 +1,8 @@
 // Check all phrases against each other
 
-module.exports = bruteArray;
+module.exports = simpleArr;
 
-function bruteArray(input) {
+function simpleArr(input) {
 	inputArray = input.split(" ");
 	return getMatchesArray(inputArray);
 }

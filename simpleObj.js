@@ -1,8 +1,8 @@
 // Similar to brute, but use an object, which is apparently more efficent
 
-module.exports = bruteObject;
+module.exports = simpleObj;
 
-function bruteObject(input) {
+function simpleObj(input) {
 	let inputArray = input.split(" ");
 	return getMatchesObject(inputArray);
 }
