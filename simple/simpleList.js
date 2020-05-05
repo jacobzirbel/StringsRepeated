@@ -1,4 +1,4 @@
-const [Node, LinkedList] = require("../LinkedList");
+const [Node, LinkedList, buildInputList] = require("../LinkedList");
 module.exports = simpleList;
 
 function simpleList(input) {
@@ -6,7 +6,6 @@ function simpleList(input) {
 	const data = {};
 	const finalData = {};
 	const inputList = buildInputList(input);
-	// searchList(inputList, data, keep);
 	let n = 0;
 	while (searchListPhrase(inputList, data, ++n, keep)) {}
 	keep.forEach((e) => {
@@ -30,18 +29,4 @@ function searchListPhrase(input, data, n, keep) {
 		}
 	});
 	return again;
-}
-
-function buildInputList(input) {
-	let inputList = new LinkedList();
-	let str = "";
-	for (let char of input) {
-		if (char === " ") {
-			inputList.add(str);
-			str = "";
-		} else {
-			str += char;
-		}
-	}
-	return inputList;
 }
