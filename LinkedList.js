@@ -23,5 +23,22 @@ Node.prototype.makePhrase = function (n) {
 	}
 	return phrase;
 };
+LinkedList.prototype.forEach = function (fn) {
+	let current = this.first.next;
+	while (current) {
+		fn(current.value);
+		current = current.next;
+	}
+};
+
+LinkedList.prototype.toArray = function () {
+	let current = this.first.next;
+	let array = [];
+	while (current) {
+		array.push(current.value);
+		current = current.next;
+	}
+	return array;
+};
 
 module.exports = [Node, LinkedList];
