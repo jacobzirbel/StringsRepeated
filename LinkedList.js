@@ -41,4 +41,18 @@ LinkedList.prototype.toArray = function () {
 	return array;
 };
 
-module.exports = [Node, LinkedList];
+function buildInputList(input) {
+	let inputList = new LinkedList();
+	let str = "";
+	for (let char of input) {
+		if (char === " ") {
+			inputList.add(str);
+			str = "";
+		} else {
+			str += char;
+		}
+	}
+	return inputList;
+}
+
+module.exports = [Node, LinkedList, buildInputList];
