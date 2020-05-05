@@ -26,7 +26,7 @@ Node.prototype.makePhrase = function (n) {
 LinkedList.prototype.forEach = function (fn) {
 	let current = this.first.next;
 	while (current) {
-		fn(current.value);
+		fn(current.value, current, this);
 		current = current.next;
 	}
 };
