@@ -6,30 +6,13 @@ function simpleList(input) {
 	const data = {};
 	const finalData = {};
 	const inputList = buildInputList(input);
-	searchList(inputList, data, keep);
+	// searchList(inputList, data, keep);
+	let n = 0;
+	while (searchListPhrase(inputList, data, ++n, keep)) {}
 	keep.forEach((e) => {
 		finalData[e] = data[e];
 	});
 	return finalData;
-}
-
-function searchList(input, data, keep) {
-	searchListWord(input, data, keep);
-	n = 1;
-	while (searchListPhrase(input, data, ++n, keep)) {}
-}
-
-function searchListWord(input, data, keep) {
-	// Initial search of list, separate function so makePhrase(1) isn't called
-	input.forEach((e) => {
-		let val = e + " ";
-		if (data[val]) {
-			if (data[val] === 1) keep.add(val);
-			data[val]++;
-		} else {
-			data[val] = 1;
-		}
-	});
 }
 
 function searchListPhrase(input, data, n, keep) {
