@@ -4,7 +4,7 @@ module.exports = fiList;
 function fiList(input) {
 	const finalData = {};
 	let inputList = buildInputList(input);
-	let data = search(inputList);
+	let data = byStarts(inputList);
 	for (let k in data) {
 		if (data[k] > 1) {
 			finalData[k] = data[k];
@@ -13,7 +13,7 @@ function fiList(input) {
 	return finalData;
 }
 
-function search(inputList) {
+function byStarts(inputList) {
 	let data = {};
 	let again = true;
 	let starts = new LinkedList();
@@ -34,7 +34,6 @@ function search(inputList) {
 			}
 		}
 	});
-
 	let n = 2;
 	while (again) {
 		again = false;
