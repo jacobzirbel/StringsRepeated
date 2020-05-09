@@ -16,7 +16,7 @@ console.time("startRemRed");
 write(remRed(input), "remred");
 console.timeEnd("startRemRed");
 
-//console.log(compareObjects(originalRemove(input), remRed(input)));
+console.log(compareObjects(remRed(input), originalRemove(input)));
 
 //console.log(time(originalRemove), time(remRed));
 function getAverageTime(method) {
@@ -40,7 +40,7 @@ function compareObjects(a, b) {
 
 	if (aKeys.length !== bKeys.length) {
 		console.log(aKeys.length, bKeys.length);
-		//return false;
+		return false;
 	}
 	for (let key of bKeys) {
 		if (b[key] !== a[key]) {
