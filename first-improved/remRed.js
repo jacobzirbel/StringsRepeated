@@ -1,5 +1,5 @@
 // Remove redundant
-
+//import { LinkedList } from "../LinkedList";
 const [Node, LinkedList, buildInputList] = require("../LinkedList");
 module.exports = remRed;
 
@@ -11,6 +11,7 @@ function search(inputList) {
 	let data = {};
 	let again = true;
 	let starts = new LinkedList();
+	let nextStarts;
 	let keep = {};
 	keep[1] = new LinkedList();
 	inputList.forEach((e, node) => {
@@ -64,7 +65,6 @@ function search(inputList) {
 	let finalKeep = new LinkedList();
 	finalKeep.rest(keep[n--]);
 	while (n > 0) {
-		console.log(n);
 		let kn = keep[n].filterValues(
 			(value) =>
 				!keep[n + 1].check((v) => v.includes(value) && data[v] === data[value])
