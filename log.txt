@@ -1,0 +1,28 @@
+Randomly chosen sample data, could be more systematically chosen 
+
+Output of all methods are compared to each other, and must be exactly the same.
+
+Results for methods for each file are tested at the same time.
+Times in ms
+
+small.txt
+simpleArr: 38.5
+simpleObj: 24.1
+simpleList: 18.3
+fiList: 2.7
+
+medium.txt
+simpleArr: 2684.2
+simpleObj: 136.6
+simpleList: 89.3
+fiList: 16.9
+
+big.txt
+simpleArr: too long to check right now
+simpleObj: 6025
+simpleList: 2500
+fiList: 573
+
+bigger.txt
+// No simple method works here, matches are too long
+fiList: 512 
