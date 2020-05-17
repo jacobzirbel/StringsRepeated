@@ -6,16 +6,18 @@ Results for methods for each file are tested at the same time.
 Times in ms
 
 small.txt
-simpleArr: 38.5
-simpleObj: 24.1
-simpleList: 18.3
-fiList: 2.7
+simpleArr: 35.4
+simpleObj: 23.9
+simpleList: 28.3
+fiList: 7.6
+fiArray:  5
 
 medium.txt
-simpleArr: 2684.2
-simpleObj: 136.6
-simpleList: 89.3
-fiList: 16.9
+simpleArr: 2914
+simpleObj: 173.75
+simpleList: 117.5
+fiList: 34.75
+fiArray: 22.5
 
 big.txt
 simpleArr: too long to check right now

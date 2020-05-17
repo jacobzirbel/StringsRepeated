@@ -4,23 +4,26 @@ const simpleObj = require("./simple/simpleObj");
 const simpleList = require("./simple/simpleList");
 const originalRemove = require("./simple/originalRemove");
 const fiList = require("./first-improved/fi-list");
+const fiArray = require("./first-improved/fi-array");
 const listNoArrays = require("./first-improved/listNoArrays");
 const remRed = require("./first-improved/remRed");
-let input = fs.readFileSync("samples/other.txt", "utf8");
+let input = fs.readFileSync("samples/medium.txt", "utf8");
 input = prepareInput(input);
 
-// console.time("startOriginal");
-// write(originalRemove(input), "ori");
-// console.timeEnd("startOriginal");
-console.time("startRemRed");
-write(remRed(input), "remred");
-console.timeEnd("startRemRed");
+// console.time("list");
+// write(fiList(input), "list");
+// console.timeEnd("list");
+// console.time("array");
+// write(fiArray(input), "array");
+// console.timeEnd("array");
 
-console.log(compareObjects(remRed(input), originalRemove(input)));
+getAverageTime(simpleArr);
+//getAverageTime(fiArray);
+//console.log(compareObjects(fiList(input), fiArray(input)));
 
 //console.log(time(originalRemove), time(remRed));
 function getAverageTime(method) {
-	let n = 1;
+	let n = 4;
 	let times = [];
 	for (let i = 0; i < n; i++) {
 		times.push(time(method));
