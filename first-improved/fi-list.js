@@ -3,8 +3,10 @@ module.exports = fiList;
 
 function fiList(input) {
 	const finalData = {};
+	const data = {};
 	let inputList = buildInputList(input);
-	let data = byStarts(inputList);
+	let starts = getStarts(inputList, data);
+	byStarts(inputList, starts, data);
 	for (let k in data) {
 		if (data[k] > 1) {
 			finalData[k] = data[k];
@@ -13,29 +15,33 @@ function fiList(input) {
 	return finalData;
 }
 
-function byStarts(inputList) {
-	let data = {};
-	let again = true;
+function getStarts(inputList, data) {
 	let starts = new LinkedList();
 	inputList.forEach((e, node) => {
 		let str = e + " ";
-		if (str) {
-			if (data[str]) {
-				if (isNaN(data[str])) {
-					starts.add(data[str]);
-					starts.add(node);
-					data[str] = 2;
-				} else {
-					starts.add(node);
-					data[str]++;
-				}
+		if (!str) return starts;
+
+		if (data[str]) {
+			if (isNaN(data[str])) {
+				starts.add(data[str]);
+				starts.add(node);
+				data[str] = 2;
 			} else {
-				data[str] = node;
+				starts.add(node);
+				data[str]++;
 			}
+		} else {
+			data[str] = node;
 		}
 	});
-	let n = 2;
+	return starts;
+}
+
+function byStarts(inputList, starts, data) {
+	let n = 1;
+	let again = true;
 	while (again) {
+		n++;
 		again = false;
 		nextStarts = new LinkedList();
 		starts.forEach((node) => {
@@ -57,7 +63,6 @@ function byStarts(inputList) {
 			}
 		});
 		starts = nextStarts;
-		n++;
 	}
 	return data;
 }
