@@ -1,10 +1,11 @@
-const [Node, LinkedList, buildInputList] = require("../LinkedList");
 module.exports = fiArray;
 
 function fiArray(input) {
 	const finalData = {};
+	const data = {};
 	let inputArray = input.split(" ");
-	let data = byStarts(inputArray);
+	let leads = getLeads(inputArray, data);
+	byLeads(inputArray, leads, data);
 	for (let k in data) {
 		if (typeof data[k] === "number" && data[k] > 1) {
 			finalData[k] = data[k];
@@ -13,64 +14,66 @@ function fiArray(input) {
 	return finalData;
 }
 
-function byStarts(inputArray) {
-	let data = {};
-	let again = true;
-	let starts = [];
+function getLeads(inputArray, data) {
+	let leads = [];
 	inputArray.forEach((e, i) => {
 		let str = e + " ";
-		if (str) {
-			if (data[str]) {
-				if (typeof data[str] === "object") {
-					starts.push(...data[str]);
-					starts.push(i);
-					data[str] = 2;
-				} else {
-					starts.push(i);
-					data[str]++;
-				}
+		if (!str) return leads;
+
+		if (data[str]) {
+			if (typeof data[str] === "string") {
+				leads.push(+data[str]);
+				leads.push(i);
+				data[str] = 2;
 			} else {
-				data[str] = [i];
+				leads.push(i);
+				data[str]++;
 			}
+		} else {
+			data[str] = i.toString();
 		}
 	});
-	let n = 2;
+	return leads;
+}
+
+function byLeads(array, leads, data) {
+	let n = 1;
+	let again = true;
 	while (again) {
+		n++;
 		again = false;
-		nextStarts = [];
-		starts.forEach((i) => {
-			let str = makePhrase(inputArray, i, n);
+		let nextLeads = [];
+		leads.forEach((i) => {
+			let str = makePhrase(array, i, n);
 			if (str) {
 				if (data[str]) {
-					if (typeof data[str] === "object") {
-						nextStarts.push(...data[str]);
-						nextStarts.push(i);
+					if (typeof data[str] === "string") {
+						nextLeads.push(+data[str]);
+						nextLeads.push(i);
 						data[str] = 2;
 						again = true;
 					} else {
-						nextStarts.push(i);
+						nextLeads.push(i);
 						data[str]++;
 					}
 				} else {
-					data[str] = [i];
+					data[str] = i.toString();
 				}
 			}
 		});
-		starts = nextStarts;
-		n++;
+		leads = nextLeads;
 	}
 	return data;
 }
 
 function makePhrase(array, i, n) {
-	let add = true;
 	let str = "";
 	for (let j = 0; j < n; j++) {
 		if (array[i + j]) {
 			str += array[i + j] + " ";
 		} else {
-			add = false;
+			return false;
 		}
 	}
-	return add && str;
+	return str;
 }
